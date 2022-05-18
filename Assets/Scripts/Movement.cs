@@ -6,43 +6,68 @@ public class Movement : MonoBehaviour
 {
     public float speed, speedRotation, speedJump;
 
-    private Rigidbody _rb;
+    private CharacterController _cc;
+    public Vector3 finalPos;
     // private Animator _anim;
     // Start is called before the first frame update
     void Start()
     {
-        _rb = GetComponent<Rigidbody>();
+        _cc = GetComponent<CharacterController>();
         //_anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        Vector3 movement = Vector3.zero;
+
+        //moure's cap a endavant
+        if (Input.GetKey(KeyCode.W))
+        {
+            movement.z = 1;
+            //_anim.SetBool("run", true);
+        }
+        //moure's cap a enrere
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            if(transform.position.z > finalPos.z){
+                movement.z = -1;
+            }
+
+            //_anim.SetBool("run", true);
+        }
+        //moure's a la dreta
+        if (Input.GetKey(KeyCode.D))
+        {
+            movement.x = 1;
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            movement.x = -1;
+            //_anim.SetBool("run", true);
+        }
+
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _rb.velocity = new Vector3(_rb.velocity.x, speedJump, _rb.velocity.z);
         }
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            _rb.velocity = new Vector3(transform.forward.x * speed, _rb.velocity.y, transform.forward.z * speed);
-            //_anim.SetBool("run", true);
-        }
+        
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            _rb.velocity = transform.forward * -speed;
-            //_anim.SetBool("run", true);
-        }
+       
 
-        /*if (!Input.anyKey)
+        if (!Input.anyKey)
             _anim.SetBool("run", false);*/
+        Move(movement);
+    }
 
-        if (Input.GetKey(KeyCode.A))
-            transform.Rotate(0, -speedRotation * Time.deltaTime, 0);
 
-        if (Input.GetKey(KeyCode.D))
-            transform.Rotate(0, speedRotation * Time.deltaTime, 0);
+    void Move(Vector3 dir)
+    {
+        _cc.SimpleMove(dir.normalized * speed);
 
     }
 }

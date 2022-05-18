@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/joc.unity
+    path: Assets/Scenes/Menu.unity
     guid: cbae444db56673b49b0982145b78c593
   - enabled: 1
-    path: Assets/joc 1.unity
+    path: Assets/Scenes/Level1.unity
     guid: d9840431f0a9b1f438cbdb9288ff7d9e
   m_configObjects: {}
