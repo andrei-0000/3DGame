@@ -5,10 +5,10 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float speed, speedRotation, speedJump;
-
+    private bool turnLeft, turnRight;
     private CharacterController _cc;
     private Vector3 initialPos;
-    public Vector3 finalPos;
+    private Vector3 finalPos;
     //private Float xToRun;
    // private Float yToRun;
   //  private Float zToRun;
@@ -29,6 +29,8 @@ public class Movement : MonoBehaviour
         yToRun = finalPos.y - initialPos.y;
         zToRun = finalPos.z - initialPos.z;
 */
+        turnLeft = Input.GetKeyDown(KeyCode.A);
+        turnRight = Input.GetKeyDown(KeyCode.D);
 
         //moure's cap a endavant
         if (Input.GetKey(KeyCode.W))
@@ -39,31 +41,18 @@ public class Movement : MonoBehaviour
         //moure's cap a enrere
         if (Input.GetKey(KeyCode.Mouse0))
         {
-           if(transform.position.z > finalPos.z){
-                movement.z = -1;
-            }
-            /*
-              if (xToRun > 0){
-                movement.x = -1;
-                xToRun -= 1;
-              }
-              if (zToRun > 0){
-                movement.z = -1;
-                zToRun -= 1;
-              }*/
-
-            //_anim.SetBool("run", true);
+            _cc.SimpleMove(new Vector3(0f, 0f, 0f));
+            _cc.Move(transform.forward * speed * Time.deltaTime);
         }
         //moure's a la dreta
-        if (Input.GetKey(KeyCode.D))
+        if (turnRight)
         {
-            movement.x = 1;
+            transform.Rotate(new Vector3(0, 90f, 0f));
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (turnLeft)
         {
-            movement.x = -1;
-            //_anim.SetBool("run", true);
+            transform.Rotate(new Vector3(0, -90f, 0f));
         }
 
         /*
