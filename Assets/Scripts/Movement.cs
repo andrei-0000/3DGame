@@ -5,10 +5,17 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float speed, speedRotation, speedJump;
-
+  
+    private bool turnLeft, turnRight;
     private CharacterController _cc;
     private Vector3 initialPos;
-    public Vector3 finalPos;
+    [SerializeField]
+    private Vector3 finalActualPos;
+    private Vector3[] positions;
+    [SerializeField]
+    private int it;
+
+    public TriggerPosition triggerPosition;
     //private Float xToRun;
    // private Float yToRun;
   //  private Float zToRun;
@@ -16,8 +23,12 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        it = 0;
         _cc = GetComponent<CharacterController>();
         //_anim = GetComponent<Animator>();
+        positions = new Vector3[]{new Vector3(-2.831235f,0.8866265f,-55.69607f), new Vector3(-35.22f,-1.107f,-61.78f)};
+        finalActualPos = positions[it];
+        triggerPosition.OnContact += ChangePos;
     }
 
     // Update is called once per frame
@@ -29,41 +40,26 @@ public class Movement : MonoBehaviour
         yToRun = finalPos.y - initialPos.y;
         zToRun = finalPos.z - initialPos.z;
 */
+        turnLeft = Input.GetKeyDown(KeyCode.A);
+        turnRight = Input.GetKeyDown(KeyCode.D);
 
-        //moure's cap a endavant
-        if (Input.GetKey(KeyCode.W))
-        {
-            movement.z = 1;
-            //_anim.SetBool("run", true);
-        }
-        //moure's cap a enrere
+        //moure's amb el click esquerra del mouse
         if (Input.GetKey(KeyCode.Mouse0))
         {
-           if(transform.position.z > finalPos.z){
-                movement.z = -1;
-            }
-            /*
-              if (xToRun > 0){
-                movement.x = -1;
-                xToRun -= 1;
-              }
-              if (zToRun > 0){
-                movement.z = -1;
-                zToRun -= 1;
-              }*/
-
-            //_anim.SetBool("run", true);
+            movement = transform.forward;
+            Move(movement);
+            
         }
-        //moure's a la dreta
-        if (Input.GetKey(KeyCode.D))
+        //si rotem cap a la dreta
+        if (turnRight)
         {
-            movement.x = 1;
+            transform.Rotate(new Vector3(0, 90f, 0f));
         }
 
-        if (Input.GetKey(KeyCode.A))
+        //si rotem cap a la esquerra
+        if (turnLeft)
         {
-            movement.x = -1;
-            //_anim.SetBool("run", true);
+            transform.Rotate(new Vector3(0, -90f, 0f));
         }
 
         /*
@@ -81,10 +77,19 @@ public class Movement : MonoBehaviour
         Move(movement);
     }
 
+    private void ChangePos(){
+        if(it < positions.Length) it++;
+    }
+
 
     void Move(Vector3 dir)
     {
         _cc.SimpleMove(dir.normalized * speed);
 
+    }
+
+    void OnDisable()
+    {
+        triggerPosition.OnContact -= ChangePos;
     }
 }
