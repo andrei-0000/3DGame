@@ -50,7 +50,7 @@ public class Movement : MonoBehaviour
             Move(movement);
             
         }
-        //si rotem cap a la dreta
+        //moure's a la dreta
         if (turnRight)
         {
             transform.Rotate(new Vector3(0, 90f, 0f));
