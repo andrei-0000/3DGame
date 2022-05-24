@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
 {
     public float speed, speedRotation, speedJump;
   
-    private bool turnLeft, turnRight;
+    public bool turnLeft, turnRight;
     private CharacterController _cc;
     private Vector3 initialPos;
     [SerializeField]
@@ -21,8 +21,21 @@ public class Movement : MonoBehaviour
   //  private Float zToRun;
     // private Animator _anim;
     // Start is called before the first frame update
+
+    public void goRight()
+    {
+        turnRight = true;
+    }
+
+    public void goLeft()
+    {
+        turnLeft = true;
+    }
+
+
     void Start()
     {
+        turnLeft = turnRight = false;
         it = 0;
         _cc = GetComponent<CharacterController>();
         //_anim = GetComponent<Animator>();
@@ -40,9 +53,6 @@ public class Movement : MonoBehaviour
         yToRun = finalPos.y - initialPos.y;
         zToRun = finalPos.z - initialPos.z;
 */
-        turnLeft = Input.GetKeyDown(KeyCode.A);
-        turnRight = Input.GetKeyDown(KeyCode.D);
-
         //moure's amb el click esquerra del mouse
         if (Input.GetKey(KeyCode.Mouse0))
         {
@@ -91,5 +101,10 @@ public class Movement : MonoBehaviour
     void OnDisable()
     {
         triggerPosition.OnContact -= ChangePos;
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "PlaneRight") goRight();
     }
 }
