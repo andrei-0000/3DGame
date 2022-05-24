@@ -3759,7 +3759,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743424568}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 849eb0a75203850489bb6f5adbc717e4, type: 3}
   m_Name: 
@@ -3767,6 +3767,9 @@ MonoBehaviour:
   speed: 5
   speedRotation: 20
   speedJump: 3
+  finalActualPos: {x: 0, y: 0, z: 0}
+  it: 0
+  triggerPosition: {fileID: 0}
 --- !u!143 &743424574
 CharacterController:
   m_ObjectHideFlags: 0
