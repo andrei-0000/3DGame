@@ -8,20 +8,8 @@ public class TriggerPosition : MonoBehaviour
     public delegate void Contact();
     public event Contact OnContact;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-    private void OnColliderEnter(Collider other){   
-        if(OnContact != null)
-            OnContact();
-
+    private void OnTriggerEnter(Collider other){
+        other.gameObject.GetComponent<Movement>().goRight();
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
