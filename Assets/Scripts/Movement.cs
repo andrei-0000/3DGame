@@ -4,23 +4,11 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float speed, speedRotation, speedJump;
-  
+    public float speed, speedJump;
     public bool turnLeft, turnRight;
     private CharacterController _cc;
-    private Vector3 initialPos;
-    [SerializeField]
-    private Vector3 finalActualPos;
-    private Vector3[] positions;
-    [SerializeField]
-    private int it;
+    private Animator _anim;
 
-    public TriggerPosition triggerPosition;
-    //private Float xToRun;
-   // private Float yToRun;
-  //  private Float zToRun;
-    // private Animator _anim;
-    // Start is called before the first frame update
 
     public void goRight()
     {
@@ -36,21 +24,23 @@ public class Movement : MonoBehaviour
     void Start()
     {
         turnLeft = turnRight = false;
-        //it = 0;
         _cc = GetComponent<CharacterController>();
-        //_anim = GetComponent<Animator>();
-        //positions = new Vector3[]{new Vector3(-2.831235f,0.8866265f,-55.69607f), new Vector3(-35.22f,-1.107f,-61.78f)};
-        //finalActualPos = positions[it];
-        //triggerPosition.OnContact += ChangePos;
+        _anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 movement = Vector3.zero;
+
+        if (!Input.anyKey)
+            _anim.SetBool("Moving", false);
+
+        
         //moure's amb el click esquerra del mouse
         if (Input.GetKey(KeyCode.Mouse0))
         {
+             _anim.SetBool("Moving", true);
             movement = transform.forward;
             Move(movement);
             
@@ -83,11 +73,6 @@ public class Movement : MonoBehaviour
             _anim.SetBool("run", false);*/
         Move(movement);
     }
-
-    private void ChangePos(){
-        if(it < positions.Length) it++;
-    }
-
 
     void Move(Vector3 dir)
     {
