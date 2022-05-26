@@ -8,7 +8,9 @@ public class Movement : MonoBehaviour
     public bool turnLeft, turnRight;
     private CharacterController _cc;
     private Animator _anim;
-    private Vector3 startPos;
+    private Transform PlayerTransform;
+    public Transform TeleportGoal;
+    public Transform PosInicial;
 
 
     public void goRight()
@@ -25,9 +27,9 @@ public class Movement : MonoBehaviour
     void Start()
     {
         turnLeft = turnRight = false;
-        startPos = transform.position;
         _cc = GetComponent<CharacterController>();
         _anim = GetComponent<Animator>();
+       // PlayerTransform = gameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
@@ -93,8 +95,24 @@ public class Movement : MonoBehaviour
     }*/
 
      public void killpl(){
-        Debug.Log("hola");
+        Debug.Log("hola q hola");
         _anim.SetBool("Die",true);
-        transform.position = startPos;
+        StartCoroutine("Teleport");
+        // PlayerTransform.position = TeleportGoal.position;
+    }
+
+    IEnumerator Teleport()
+    {
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        _cc.enabled = false;
+        _cc.detectCollisions = true;
+        _cc.enableOverlapRecovery = true;
+
+        yield return new WaitForSeconds(0.01f);
+        //gameObject.transform.position = new Vector3(-0.550000012f, 6.529999971f, -2.38000011f);
+        gameObject.transform.position = PosInicial.position;
+        yield return new WaitForSeconds(0.01f);
+        gameObject.GetComponent<Rigidbody>().useGravity = true;
+        _cc.enabled = true;
     }
 }
