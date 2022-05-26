@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     public bool turnLeft, turnRight;
     private CharacterController _cc;
     private Animator _anim;
+    private Vector3 startPos;
 
 
     public void goRight()
@@ -24,6 +25,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         turnLeft = turnRight = false;
+        startPos = transform.position;
         _cc = GetComponent<CharacterController>();
         _anim = GetComponent<Animator>();
     }
@@ -89,4 +91,10 @@ public class Movement : MonoBehaviour
     {
         if (col.gameObject.tag == "PlaneRight") goRight();
     }*/
+
+     public void killpl(){
+        Debug.Log("hola");
+        _anim.SetBool("Die",true);
+        transform.position = startPos;
+    }
 }
