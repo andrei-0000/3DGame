@@ -114,5 +114,10 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(0.01f);
         gameObject.GetComponent<Rigidbody>().useGravity = true;
         _cc.enabled = true;
+        _anim.SetBool("Die",false);
+    }
+
+    public void win(){
+        _anim.SetBool("Win",true);
     }
 }

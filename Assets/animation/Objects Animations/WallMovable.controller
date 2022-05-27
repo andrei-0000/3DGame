@@ -126,7 +126,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WallMovable (2)
+  m_Name: WallMovable
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -183,7 +183,7 @@ AnimatorStateMachine:
     m_Position: {x: 300, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8786693201234254149}
-    m_Position: {x: 309.10303, y: 315.5256, z: 0}
+    m_Position: {x: 310, y: 320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7163187509782325894}
     m_Position: {x: 759.5017, y: 323.88672, z: 0}
