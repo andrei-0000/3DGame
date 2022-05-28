@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float speed, speedJump;
+    public float speed, speedJump, speedUp;
     public bool turnLeft, turnRight;
     private CharacterController _cc;
+    private Rigidbody _rigibody;
     private Animator _anim;
+    private bool inLadder;
     private Transform PlayerTransform;
     public Transform TeleportGoal;
     public Transform PosInicial;
@@ -26,9 +28,11 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-        turnLeft = turnRight = false;
+
+        turnLeft = turnRight = inLadder = false;
         _cc = GetComponent<CharacterController>();
         _anim = GetComponent<Animator>();
+        _rigibody = gameObject.GetComponent<Rigidbody>();
        // PlayerTransform = gameObject.Find("Player").transform;
     }
 
@@ -40,19 +44,26 @@ public class Movement : MonoBehaviour
         if (!Input.anyKey)
             _anim.SetBool("Moving", false);
 
-        
+
         //moure's amb el click esquerra del mouse
         if (Input.GetKey(KeyCode.Mouse0))
         {
-             _anim.SetBool("Moving", true);
-            movement = transform.forward;
-            Move(movement);
-            
+            if (inLadder == true)
+            {
+                gameObject.transform.position += Vector3.up / speedUp ;
+            }
+            else
+            {
+                _anim.SetBool("Moving", true);
+                _cc.SimpleMove(new Vector3(0f, 0f, 0f));
+                _cc.Move(transform.forward * speed * Time.deltaTime);
+            }
+
         }
         //moure's a la dreta
         if (turnRight)
         {
-            transform.Rotate(new Vector3(0, 45f, 0f));
+            transform.Rotate(new Vector3(0, 90f, 0f));
             turnRight = false;
         }
 
@@ -101,15 +112,32 @@ public class Movement : MonoBehaviour
         // PlayerTransform.position = TeleportGoal.position;
     }
 
+    public void goUp(bool inside)
+    {
+        if (inside)
+        {
+            _cc.enabled = false;
+            _rigibody.useGravity = false;
+            inLadder = !inLadder;
+
+        }
+        else
+        {
+            _cc.enabled = true;
+            _rigibody.useGravity = true;
+            inLadder = !inLadder;
+
+        }
+    }
+
     IEnumerator Teleport()
     {
-        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        _rigibody.useGravity = false;
         _cc.enabled = false;
         _cc.detectCollisions = true;
         _cc.enableOverlapRecovery = true;
 
         yield return new WaitForSeconds(0.01f);
-        //gameObject.transform.position = new Vector3(-0.550000012f, 6.529999971f, -2.38000011f);
         gameObject.transform.position = PosInicial.position;
         yield return new WaitForSeconds(0.01f);
         gameObject.GetComponent<Rigidbody>().useGravity = true;
