@@ -123,9 +123,12 @@ public class Movement : MonoBehaviour
         }
         else
         {
+
+           
             _cc.enabled = true;
-            _rigibody.useGravity = true;
+            _cc.Move(transform.forward * speed  * Time.deltaTime);
             inLadder = !inLadder;
+            _rigibody.useGravity = true;
 
         }
     }
