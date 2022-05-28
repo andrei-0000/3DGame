@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     private Rigidbody _rigibody;
     private Animator _anim;
     private bool inLadder;
+    private bool inSlide;
     private Transform PlayerTransform;
     public Transform TeleportGoal;
     public Transform PosInicial;
@@ -29,7 +30,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
 
-        turnLeft = turnRight = inLadder = false;
+        turnLeft = turnRight = inLadder = inSlide = false;
         _cc = GetComponent<CharacterController>();
         _anim = GetComponent<Animator>();
         _rigibody = gameObject.GetComponent<Rigidbody>();
@@ -40,52 +41,58 @@ public class Movement : MonoBehaviour
     void Update()
     {
         Vector3 movement = Vector3.zero;
-
-        if (!Input.anyKey)
+        if (inSlide)
+        {
+            _anim.SetBool("Moving", true);
+            gameObject.transform.position += Vector3.forward / speedUp;
+        }
+       else  if (!Input.anyKey)
             _anim.SetBool("Moving", false);
 
-
         //moure's amb el click esquerra del mouse
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            if (inLadder == true)
+        else {
+            if (Input.GetKey(KeyCode.Mouse0))
             {
-                gameObject.transform.position += Vector3.up / speedUp ;
+                if (inLadder == true)
+                {
+                    gameObject.transform.position += Vector3.up / speedUp;
+                }
+                else
+                {
+                    _anim.SetBool("Moving", true);
+                    _cc.SimpleMove(new Vector3(0f, 0f, 0f));
+                    _cc.Move(transform.forward * speed * Time.deltaTime);
+                }
+
             }
-            else
+            //moure's a la dreta
+            if (turnRight)
             {
-                _anim.SetBool("Moving", true);
-                _cc.SimpleMove(new Vector3(0f, 0f, 0f));
-                _cc.Move(transform.forward * speed * Time.deltaTime);
+                transform.Rotate(new Vector3(0, 90f, 0f));
+                turnRight = false;
             }
 
+            //si rotem cap a la esquerra
+            if (turnLeft)
+            {
+                transform.Rotate(new Vector3(0, -45f, 0f));
+                turnLeft = false;
+            }
+
+            /*
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _rb.velocity = new Vector3(_rb.velocity.x, speedJump, _rb.velocity.z);
+            }
+
+
+
+
+
+
+            if (!Input.anyKey)
+                _anim.SetBool("run", false);*/
         }
-        //moure's a la dreta
-        if (turnRight)
-        {
-            transform.Rotate(new Vector3(0, 90f, 0f));
-            turnRight = false;
-        }
-
-        //si rotem cap a la esquerra
-        if (turnLeft)
-        {
-            transform.Rotate(new Vector3(0, -45f, 0f));
-            turnLeft = false;
-        }
-
-        /*
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _rb.velocity = new Vector3(_rb.velocity.x, speedJump, _rb.velocity.z);
-        }
-
-        
-
-       
-
-        if (!Input.anyKey)
-            _anim.SetBool("run", false);*/
         Move(movement);
     }
 
@@ -129,6 +136,28 @@ public class Movement : MonoBehaviour
             _cc.Move(transform.forward * speed  * Time.deltaTime);
             inLadder = !inLadder;
             _rigibody.useGravity = true;
+
+        }
+    }
+
+    public void goSlide(bool inside)
+    {
+        if (inside)
+        {
+            transform.Rotate(new Vector3(10f, 0f, 0f));
+            _cc.enabled = false;
+            //_rigibody.useGravity = false;
+            inSlide = !inSlide;
+
+        }
+        else
+        {
+
+            transform.Rotate(new Vector3(-10f, 0f, 0f));
+            _cc.enabled = true;
+            _cc.Move(transform.forward * speed * Time.deltaTime);
+            inSlide = !inSlide;
+            //_rigibody.useGravity = true;
 
         }
     }
