@@ -116,6 +116,7 @@ public class Movement : MonoBehaviour
         Debug.Log("hola q hola");
         _anim.SetBool("Die",true);
         StartCoroutine("Teleport");
+        gameObject.GetComponentInChildren<ProgressBar>().reset();
         // PlayerTransform.position = TeleportGoal.position;
     }
 
@@ -169,7 +170,7 @@ public class Movement : MonoBehaviour
         _cc.detectCollisions = true;
         _cc.enableOverlapRecovery = true;
 
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.1f);
         gameObject.transform.position = PosInicial.position;
         yield return new WaitForSeconds(0.01f);
         gameObject.GetComponent<Rigidbody>().useGravity = true;
