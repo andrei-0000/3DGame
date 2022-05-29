@@ -46,24 +46,42 @@ public class Movement : MonoBehaviour
             _anim.SetBool("Moving", true);
             gameObject.transform.position += Vector3.forward / speedUp;
         }
-       else  if (!Input.anyKey)
+       if (!Input.anyKey) 
             _anim.SetBool("Moving", false);
 
         //moure's amb el click esquerra del mouse
-        else {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                if (inLadder == true)
-                {
-                    gameObject.transform.position += Vector3.up / speedUp;
-                }
-                else
-                {
-                    _anim.SetBool("Moving", true);
-                    _cc.SimpleMove(new Vector3(0f, 0f, 0f));
-                    _cc.Move(transform.forward * speed * Time.deltaTime);
-                }
+            if(gameObject.layer == 11){
 
+                if (Input.GetKey(KeyCode.Mouse0))
+                {
+                    if (inLadder == true)
+                    {
+                        gameObject.transform.position += Vector3.up / speedUp;
+                    }
+                    else
+                    {
+                        _anim.SetBool("Moving", true);
+                        _cc.SimpleMove(new Vector3(0f, 0f, 0f));
+                        _cc.Move(transform.forward * speed * Time.deltaTime);
+                    }
+
+                }
+            }
+            else {
+                if (gameObject.layer == 12){
+                    if (Input.GetKey(KeyCode.Mouse1)) {
+                        if (inLadder == true)
+                        {
+                            gameObject.transform.position += Vector3.up / speedUp ;
+                        }
+                        else
+                        {
+                            _anim.SetBool("Moving", true);
+                            _cc.SimpleMove(new Vector3(0f, 0f, 0f));
+                            _cc.Move(transform.forward * speed * Time.deltaTime);
+                        }
+                    }
+                }
             }
             //moure's a la dreta
             if (turnRight)
@@ -78,21 +96,6 @@ public class Movement : MonoBehaviour
                 transform.Rotate(new Vector3(0, -45f, 0f));
                 turnLeft = false;
             }
-
-            /*
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _rb.velocity = new Vector3(_rb.velocity.x, speedJump, _rb.velocity.z);
-            }
-
-
-
-
-
-
-            if (!Input.anyKey)
-                _anim.SetBool("run", false);*/
-        }
         Move(movement);
     }
 
@@ -101,16 +104,6 @@ public class Movement : MonoBehaviour
         _cc.SimpleMove(dir.normalized * speed);
 
     }
-
-    /*void OnDisable()
-    {
-        triggerPosition.OnContact -= ChangePos;
-    }*/
-
-   /* void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "PlaneRight") goRight();
-    }*/
 
      public void killpl(){
         Debug.Log("hola q hola");
