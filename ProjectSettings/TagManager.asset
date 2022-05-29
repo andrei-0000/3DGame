@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
+  - Slide
+  - MainCameraP1
+  - MainCameraP2
+  - VirtualCameraP1
+  - VirtualCameraP2
   layers:
   - Default
   - TransparentFX
