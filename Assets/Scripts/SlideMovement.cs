@@ -9,7 +9,6 @@ public class SlideMovement : MonoBehaviour
     {
         Debug.Log("Entra");
         other.gameObject.GetComponent<Movement>().goSlide(true);
-       // Debug.Log("Entra2");
     }
     
         private void OnTriggerExit(Collider other)

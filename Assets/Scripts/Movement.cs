@@ -74,6 +74,7 @@ public class Movement : MonoBehaviour
                     if (Input.GetKey(KeyCode.Mouse1)) {
                         if (inLadder == true)
                         {
+                            _anim.SetBool("Climb", true);
                             gameObject.transform.position += Vector3.up / speedUp ;
                         }
                         else
@@ -185,8 +186,8 @@ public class Movement : MonoBehaviour
     }
     public void updateInitialPos(Transform updatedPos){ 
         Vector3 position = updatedPos.position;
-        position.x = transform.position.x;
-        position.y = transform.position.y;
+        position.x = updatedPos.position.x;
+        position.y = updatedPos.position.y;
         position.z = updatedPos.position.z;
         PosInicial.position = position;
     }
