@@ -158,12 +158,12 @@ public class Movement : MonoBehaviour
 
     IEnumerator Teleport()
     {
-        _rigibody.useGravity = false;
+        //_rigibody.useGravity = false;
         _cc.enabled = false;
-        _cc.detectCollisions = true;
-        _cc.enableOverlapRecovery = true;
+        //_cc.detectCollisions = true;
+        //_cc.enableOverlapRecovery = true;
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(2f);
         gameObject.transform.position = PosInicial.position;
         yield return new WaitForSeconds(0.01f);
         gameObject.GetComponent<Rigidbody>().useGravity = true;
