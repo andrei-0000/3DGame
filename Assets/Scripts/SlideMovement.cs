@@ -9,13 +9,13 @@ public class SlideMovement : MonoBehaviour
     {
         Debug.Log("Entra");
         other.gameObject.GetComponent<Movement>().goSlide(true);
-        Debug.Log("Entra2");
+       // Debug.Log("Entra2");
     }
     
         private void OnTriggerExit(Collider other)
         {
             Debug.Log("Sale");
             other.gameObject.GetComponent<Movement>().goSlide(false);
-            Debug.Log("Sale2");
+            //Debug.Log("Sale2");
         }
 }

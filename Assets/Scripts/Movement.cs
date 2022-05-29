@@ -44,7 +44,8 @@ public class Movement : MonoBehaviour
         if (inSlide)
         {
             _anim.SetBool("Moving", true);
-            gameObject.transform.position += Vector3.forward / speedUp;
+            Vector3 dir = new Vector3(0f, -0.5f, -1f);
+            gameObject.transform.position += dir / speedUp  ;
         }
        if (!Input.anyKey) 
             _anim.SetBool("Moving", false);
@@ -138,8 +139,9 @@ public class Movement : MonoBehaviour
     {
         if (inside)
         {
-            transform.Rotate(new Vector3(10f, 0f, 0f));
             _cc.enabled = false;
+            transform.Rotate(new Vector3(10f, 0f, 0f));
+
             //_rigibody.useGravity = false;
             inSlide = !inSlide;
 
@@ -149,7 +151,6 @@ public class Movement : MonoBehaviour
 
             transform.Rotate(new Vector3(-10f, 0f, 0f));
             _cc.enabled = true;
-            _cc.Move(transform.forward * speed * Time.deltaTime);
             inSlide = !inSlide;
             //_rigibody.useGravity = true;
 
