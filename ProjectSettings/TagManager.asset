@@ -10,6 +10,8 @@ TagManager:
   - MainCameraP2
   - VirtualCameraP1
   - VirtualCameraP2
+  - FinalCamP2
+  - FinalCamP1
   layers:
   - Default
   - TransparentFX
