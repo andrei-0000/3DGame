@@ -6,7 +6,7 @@ public class TriggerPosition : MonoBehaviour
 {
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other){
-        other.gameObject.GetComponent<Movement>().goRight();
+        other.gameObject.GetComponent<Movement>().goLeft();
     }
 
 }

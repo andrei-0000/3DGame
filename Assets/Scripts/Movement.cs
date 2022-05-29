@@ -57,6 +57,7 @@ public class Movement : MonoBehaviour
                 {
                     if (inLadder == true)
                     {
+                        _anim.SetBool("Climb", true);
                         gameObject.transform.position += Vector3.up / speedUp;
                     }
                     else
@@ -125,8 +126,7 @@ public class Movement : MonoBehaviour
         }
         else
         {
-
-           
+           _anim.SetBool("Climb", false);
             _cc.enabled = true;
             _cc.Move(transform.forward * speed  * Time.deltaTime);
             inLadder = !inLadder;
@@ -139,6 +139,7 @@ public class Movement : MonoBehaviour
     {
         if (inside)
         {
+            _anim.SetBool("Slide", true);
             _cc.enabled = false;
             transform.Rotate(new Vector3(10f, 0f, 0f));
 
@@ -148,7 +149,7 @@ public class Movement : MonoBehaviour
         }
         else
         {
-
+            _anim.SetBool("Slide", false);
             transform.Rotate(new Vector3(-10f, 0f, 0f));
             _cc.enabled = true;
             inSlide = !inSlide;
@@ -174,5 +175,19 @@ public class Movement : MonoBehaviour
 
     public void win(){
         _anim.SetBool("Win",true);
+    }
+
+    public void changeVelocityToZero(){
+        speed = 0;
+    }
+    public void changeVelocityToNormal(){
+        speed = 5;
+    }
+    public void updateInitialPos(Transform updatedPos){ 
+        Vector3 position = updatedPos.position;
+        position.x = transform.position.x;
+        position.y = transform.position.y;
+        position.z = updatedPos.position.z;
+        PosInicial.position = position;
     }
 }
