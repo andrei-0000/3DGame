@@ -50,7 +50,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
         Vector3 movement = Vector3.zero;
-        if(Input.GetKey(KeyCode.G)) godMode = !godMode;
+        if(Input.GetKeyDown(KeyCode.G)) godMode = !godMode;
         if (inSlide)
         {
             _anim.SetBool("Moving", true);
