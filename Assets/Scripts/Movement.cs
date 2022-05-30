@@ -65,8 +65,14 @@ public class Movement : MonoBehaviour
             Vector3 dir = new Vector3(0f, -0.5f, -1f);
             gameObject.transform.position += dir / speedUp  ;
         }
-       if (!Input.anyKey) 
+       /*if (!Input.anyKey) 
+            _anim.SetBool("Moving", false);*/
+        if(!Input.GetKey(KeyCode.P)){
             _anim.SetBool("Moving", false);
+        }
+        else if(!Input.GetKey(KeyCode.W)){
+            _anim.SetBool("Moving", false);
+        }
 
         //moure's amb el click esquerra del mouse
             if(gameObject.layer == 11){
@@ -131,7 +137,7 @@ public class Movement : MonoBehaviour
              SoundManager.PlaySound("hit");
             _anim.SetBool("Die",true);
             StartCoroutine("Teleport");
-            gameObject.GetComponentInChildren<ProgressBar>().reset();
+            gameObject.GetComponentInChildren<ProgressBar>().saveProgress();
             // PlayerTransform.position = TeleportGoal.position;
          }
         
@@ -255,7 +261,7 @@ public class Movement : MonoBehaviour
         Vector3 position = updatedPos.position;
         //position.x = transform.position.x;
         //position.y = transform.position.y;
-        //position.z = updatedPos.position.z;
+        position.z = updatedPos.position.z;
         PosInicial.position = position;
     }
 }

@@ -9,7 +9,7 @@ public class ProgressBar : MonoBehaviour
     private float targetProgress = 0;
     private ParticleSystem particleSys;
     public float FillSpeed = 0.25f;
-
+    public bool ff = true;
     private void Awake()
     {
         slider = gameObject.GetComponent<Slider>();
@@ -46,4 +46,9 @@ public class ProgressBar : MonoBehaviour
     public void IncrementProgress(float newProgress) { 
 
         targetProgress = slider.value + newProgress; }
+    public void saveProgress(){
+        slider.value = slider.value - 0.25f;
+        targetProgress = 0;
+    }
 }
+
