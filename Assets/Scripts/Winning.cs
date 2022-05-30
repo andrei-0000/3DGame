@@ -6,7 +6,7 @@ public class Winning : MonoBehaviour
 {
     private ParticleSystem particleSys;
 
-    private void Awake()
+    private void Start()
     {
         particleSys = gameObject.GetComponentInChildren<ParticleSystem>();
         particleSys.Stop();

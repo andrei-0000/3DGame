@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -21,8 +22,6 @@ public class Movement : MonoBehaviour
     private CinemachineVirtualCamera cvc;
     [SerializeField]
     private CinemachineTransposer ct;
-    private ParticleSystem particleSys;
-
 
     bool godMode = false;
 
@@ -52,7 +51,14 @@ public class Movement : MonoBehaviour
     void Update()
     {
         Vector3 movement = Vector3.zero;
+        
         if(Input.GetKeyDown(KeyCode.G)) godMode = !godMode;
+        if (Input.GetKeyDown(KeyCode.Keypad1))  SceneManager.LoadScene(1);
+        else if (Input.GetKeyDown(KeyCode.Keypad2)) SceneManager.LoadScene(2);
+        else if (Input.GetKeyDown(KeyCode.Keypad3)) SceneManager.LoadScene(3);
+        //if (Input.GetKeyDown(KeyCode.4)) SceneManager.LoadScene(4);
+        //if (Input.GetKeyDown(KeyCode.5)) SceneManager.LoadScene(5);
+
         if (inSlide)
         {
             _anim.SetBool("Moving", true);
