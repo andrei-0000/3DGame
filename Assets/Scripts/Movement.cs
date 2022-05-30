@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Movement : MonoBehaviour
 {
@@ -14,6 +15,14 @@ public class Movement : MonoBehaviour
     private Transform PlayerTransform;
     public Transform TeleportGoal;
     public Transform PosInicial;
+    public GameObject VcameraP1;
+    public GameObject VcameraP2;
+     [SerializeField]
+    private CinemachineVirtualCamera cvc;
+    [SerializeField]
+    private CinemachineTransposer ct;
+
+    bool godMode = false;
 
 
     public void goRight()
@@ -41,6 +50,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
         Vector3 movement = Vector3.zero;
+        if(Input.GetKey(KeyCode.G)) godMode = !godMode;
         if (inSlide)
         {
             _anim.SetBool("Moving", true);
@@ -109,12 +119,15 @@ public class Movement : MonoBehaviour
     }
 
      public void killpl(){
-        SoundManager.PlaySound("hit");
-        Debug.Log("hola q hola");
-        _anim.SetBool("Die",true);
-        StartCoroutine("Teleport");
-        gameObject.GetComponentInChildren<ProgressBar>().reset();
-        // PlayerTransform.position = TeleportGoal.position;
+         if(!godMode){
+             SoundManager.PlaySound("hit");
+            Debug.Log("hola q hola");
+            _anim.SetBool("Die",true);
+            StartCoroutine("Teleport");
+            gameObject.GetComponentInChildren<ProgressBar>().reset();
+            // PlayerTransform.position = TeleportGoal.position;
+         }
+        
     }
 
     public void goUp(bool inside)
@@ -139,22 +152,58 @@ public class Movement : MonoBehaviour
 
     public void goSlide(bool inside)
     {
+        VcameraP1 = GameObject.FindWithTag("VirtualCameraP1");
+        VcameraP2 = GameObject.FindWithTag("VirtualCameraP2");
+        float y_dump = 0f;
         if (inside)
         {
-            _anim.SetBool("Slide", true);
-            _cc.enabled = false;
-            transform.Rotate(new Vector3(10f, 0f, 0f));
-
+            if (gameObject.layer == 11){ 
+                cvc = VcameraP1.GetComponent<CinemachineVirtualCamera>();
+                ct = cvc.GetCinemachineComponent<CinemachineTransposer>();
+                y_dump = ct.m_YDamping;
+                Debug.Log(y_dump);
+                ct.m_YDamping = 0; 
+                _anim.SetBool("Slide", true);
+                _cc.enabled = false;
+                transform.Rotate(new Vector3(10f, 0f, 0f));
             //_rigibody.useGravity = false;
-            inSlide = !inSlide;
-
+                inSlide = !inSlide;
+            }
+            else{
+                cvc = VcameraP2.GetComponent<CinemachineVirtualCamera>();
+                ct = cvc.GetCinemachineComponent<CinemachineTransposer>();
+                y_dump = ct.m_YDamping;
+                Debug.Log(y_dump);
+                ct.m_YDamping = 0; 
+                _anim.SetBool("Slide", true);
+                _cc.enabled = false;
+                transform.Rotate(new Vector3(10f, 0f, 0f));
+            //_rigibody.useGravity = false;
+                inSlide = !inSlide;
+            }
         }
         else
         {
-            _anim.SetBool("Slide", false);
-            transform.Rotate(new Vector3(-10f, 0f, 0f));
-            _cc.enabled = true;
-            inSlide = !inSlide;
+            if (gameObject.layer == 11){
+                cvc = VcameraP1.GetComponent<CinemachineVirtualCamera>();
+                ct = cvc.GetCinemachineComponent<CinemachineTransposer>();
+                ct.m_YDamping = 5.76f; 
+                _anim.SetBool("Slide", false);
+                transform.Rotate(new Vector3(-10f, 0f, 0f));
+                _cc.enabled = true;
+                inSlide = !inSlide;
+            }
+            else{
+                cvc = VcameraP2.GetComponent<CinemachineVirtualCamera>();
+                ct = cvc.GetCinemachineComponent<CinemachineTransposer>();
+                ct.m_YDamping = 5.76f;
+                 _anim.SetBool("Slide", false);
+                transform.Rotate(new Vector3(-10f, 0f, 0f));
+                _cc.enabled = true;
+                inSlide = !inSlide;
+
+            }
+            
             //_rigibody.useGravity = true;
 
         }
@@ -188,9 +237,9 @@ public class Movement : MonoBehaviour
     }
     public void updateInitialPos(Transform updatedPos){ 
         Vector3 position = updatedPos.position;
-        position.x = updatedPos.position.x;
-        position.y = updatedPos.position.y;
-        position.z = updatedPos.position.z;
+        //position.x = transform.position.x;
+        //position.y = transform.position.y;
+        //position.z = updatedPos.position.z;
         PosInicial.position = position;
     }
 }
