@@ -150,7 +150,7 @@ public class Movement : MonoBehaviour
         {
            _anim.SetBool("Climb", false);
             _cc.enabled = true;
-            _cc.Move(transform.forward * speed  * Time.deltaTime);
+            _cc.Move(transform.forward * speed * 4  * Time.deltaTime);
             inLadder = !inLadder;
             _rigibody.useGravity = true;
 
