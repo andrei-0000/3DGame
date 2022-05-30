@@ -59,7 +59,7 @@ public class WallMovable : MonoBehaviour
 		if (isRandom && !isDown) //If is wall up and is random
 		{
 			int num = Random.Range(0, 2);
-			//Debug.Log(num);
+
 			if (num == 1)
 				StartCoroutine(Retry(1.5f));
 		}
@@ -71,7 +71,6 @@ public class WallMovable : MonoBehaviour
 		canChange = false;
 		yield return new WaitForSeconds(time);
 		int num = Random.Range(0, 2);
-		//Debug.Log("2-"+num);
 		if (num == 1)
 			StartCoroutine(Retry(1.25f));
 		else

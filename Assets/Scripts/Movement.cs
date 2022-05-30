@@ -121,7 +121,6 @@ public class Movement : MonoBehaviour
      public void killpl(){
          if(!godMode){
              SoundManager.PlaySound("hit");
-            Debug.Log("hola q hola");
             _anim.SetBool("Die",true);
             StartCoroutine("Teleport");
             gameObject.GetComponentInChildren<ProgressBar>().reset();
@@ -161,7 +160,6 @@ public class Movement : MonoBehaviour
                 cvc = VcameraP1.GetComponent<CinemachineVirtualCamera>();
                 ct = cvc.GetCinemachineComponent<CinemachineTransposer>();
                 y_dump = ct.m_YDamping;
-                Debug.Log(y_dump);
                 ct.m_YDamping = 0; 
                 _anim.SetBool("Slide", true);
                 _cc.enabled = false;
@@ -173,7 +171,6 @@ public class Movement : MonoBehaviour
                 cvc = VcameraP2.GetComponent<CinemachineVirtualCamera>();
                 ct = cvc.GetCinemachineComponent<CinemachineTransposer>();
                 y_dump = ct.m_YDamping;
-                Debug.Log(y_dump);
                 ct.m_YDamping = 0; 
                 _anim.SetBool("Slide", true);
                 _cc.enabled = false;

@@ -19,8 +19,6 @@ public class CamaraWinning : MonoBehaviour
     private Camera fc;
     [SerializeField]
     private CinemachineVirtualCamera cvc;
-    [SerializeField]
-    private CinemachineTransposer ct;
     public void changeCamara(){
         _cc = GetComponent<CharacterController>();
         cameraP1 = GameObject.FindWithTag("MainCameraP1");
@@ -31,34 +29,24 @@ public class CamaraWinning : MonoBehaviour
         finalCamP2 = GameObject.FindWithTag("FinalCamP2");
             if (gameObject.layer == 11){ //player 1
                 cvc = VcameraP1.GetComponent<CinemachineVirtualCamera>();
-                cvc.m_Lens.FieldOfView = 20f;
-                //transform.Rotate(new Vector3(0, 180f, 0f));
-                ct = cvc.GetCinemachineComponent<CinemachineTransposer>();
-               // Destroy(cameraP1);
-               
+                cvc.m_Lens.FieldOfView = 20f;;
                 c1 = cameraP1.GetComponent<Camera>();
-                c2 = cameraP1.GetComponent<Camera>();
+                c2 = cameraP2.GetComponent<Camera>();
                 fc = finalCamP1.GetComponent<Camera>();
                 c1.enabled = false;
                 c2.enabled = false;
                 fc.enabled = true;
-               // ct.m_BindingMode = ;
                _cc.enabled = false;
         }
         else{ //player 2
-             cvc = VcameraP1.GetComponent<CinemachineVirtualCamera>();
-                cvc.m_Lens.FieldOfView = 20f;
-                //transform.Rotate(new Vector3(0, 180f, 0f));
-                ct = cvc.GetCinemachineComponent<CinemachineTransposer>();
-               // Destroy(cameraP1);
-               
+                cvc = VcameraP2.GetComponent<CinemachineVirtualCamera>();
+                cvc.m_Lens.FieldOfView = 20f;  
                 c1 = cameraP1.GetComponent<Camera>();
-                c2 = cameraP1.GetComponent<Camera>();
+                c2 = cameraP2.GetComponent<Camera>();
                 fc = finalCamP2.GetComponent<Camera>();
                 c1.enabled = false;
                 c2.enabled = false;
                 fc.enabled = true;
-               // ct.m_BindingMode = ;
                _cc.enabled = false;
 
         }

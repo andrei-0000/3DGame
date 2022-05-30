@@ -2666,7 +2666,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361156406}
-  m_LocalRotation: {x: 0.0024763495, y: 0.93359786, z: -0.35825592, w: 0.0064532487}
+  m_LocalRotation: {x: 0.002476365, y: 0.93359786, z: -0.35825595, w: 0.0064532897}
   m_LocalPosition: {x: -4.352112, y: 8.900001, z: 13.73928}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8922,7 +8922,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635434052}
-  m_LocalRotation: {x: 0.0024763495, y: 0.93359786, z: -0.35825592, w: 0.0064532487}
+  m_LocalRotation: {x: 0.002476365, y: 0.93359786, z: -0.35825595, w: 0.0064532897}
   m_LocalPosition: {x: -4.352112, y: 8.900001, z: 13.73928}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -9961,7 +9961,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810540226}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9, z: 0.9}
@@ -11560,6 +11560,10 @@ MonoBehaviour:
   turnRight: 0
   TeleportGoal: {fileID: 0}
   PosInicial: {fileID: 2004840579}
+  VcameraP1: {fileID: 0}
+  VcameraP2: {fileID: 0}
+  cvc: {fileID: 0}
+  ct: {fileID: 0}
 --- !u!143 &980115675
 CharacterController:
   m_ObjectHideFlags: 0
@@ -14592,6 +14596,10 @@ MonoBehaviour:
   turnRight: 0
   TeleportGoal: {fileID: 0}
   PosInicial: {fileID: 1003378915}
+  VcameraP1: {fileID: 0}
+  VcameraP2: {fileID: 0}
+  cvc: {fileID: 0}
+  ct: {fileID: 0}
 --- !u!143 &1205273210
 CharacterController:
   m_ObjectHideFlags: 0

@@ -7,14 +7,11 @@ public class SlideMovement : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Entra");
         other.gameObject.GetComponent<Movement>().goSlide(true);
     }
     
-        private void OnTriggerExit(Collider other)
-        {
-            Debug.Log("Sale");
-            other.gameObject.GetComponent<Movement>().goSlide(false);
-            //Debug.Log("Sale2");
-        }
+    private void OnTriggerExit(Collider other)
+    {
+        other.gameObject.GetComponent<Movement>().goSlide(false);
+    }
 }
