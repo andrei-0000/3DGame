@@ -20,7 +20,6 @@ public class CamaraWinning : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera cvc;
     public void changeCamara(){
-        _cc = GetComponent<CharacterController>();
         cameraP1 = GameObject.FindWithTag("MainCameraP1");
         cameraP2 = GameObject.FindWithTag("MainCameraP2");
         VcameraP1 = GameObject.FindWithTag("VirtualCameraP1");
@@ -36,7 +35,6 @@ public class CamaraWinning : MonoBehaviour
                 c1.enabled = false;
                 c2.enabled = false;
                 fc.enabled = true;
-               _cc.enabled = false;
         }
         else{ //player 2
                 cvc = VcameraP2.GetComponent<CinemachineVirtualCamera>();
@@ -47,7 +45,6 @@ public class CamaraWinning : MonoBehaviour
                 c1.enabled = false;
                 c2.enabled = false;
                 fc.enabled = true;
-               _cc.enabled = false;
 
         }
     }
