@@ -21,6 +21,8 @@ public class Movement : MonoBehaviour
     private CinemachineVirtualCamera cvc;
     [SerializeField]
     private CinemachineTransposer ct;
+    private ParticleSystem particleSys;
+
 
     bool godMode = false;
 
