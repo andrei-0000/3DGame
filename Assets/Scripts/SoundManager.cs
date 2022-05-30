@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
         winSound = Resources.Load<AudioClip>("win");
         music = Resources.Load<AudioClip>("music");
         audioSrc = GetComponent<AudioSource>();
+        audioSrc.PlayOneShot(music);
         if (audioSrc == null) audioSrc = gameObject.AddComponent<AudioSource>();
     }
 

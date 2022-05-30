@@ -52,11 +52,12 @@ public class Movement : MonoBehaviour
     {
         Vector3 movement = Vector3.zero;
         if (Input.GetKeyDown(KeyCode.G)) godMode = !godMode;
+        if (Input.GetKeyDown(KeyCode.Alpha0))  SceneManager.LoadScene(0);
         if (Input.GetKeyDown(KeyCode.Alpha1))  SceneManager.LoadScene(1);
         else if (Input.GetKeyDown(KeyCode.Alpha2)) SceneManager.LoadScene(2);
         else if (Input.GetKeyDown(KeyCode.Alpha3)) SceneManager.LoadScene(3);
-        //if (Input.GetKeyDown(KeyCode.4)) SceneManager.LoadScene(4);
-        //if (Input.GetKeyDown(KeyCode.5)) SceneManager.LoadScene(5);
+        else if (Input.GetKeyDown(KeyCode.Alpha4)) SceneManager.LoadScene(4);
+        else if (Input.GetKeyDown(KeyCode.Alpha5)) SceneManager.LoadScene(5);
 
         if (inSlide)
         {
@@ -234,7 +235,8 @@ public class Movement : MonoBehaviour
         SoundManager.PlaySound("win");
         _anim.SetBool("Win", true);
         yield return new WaitForSeconds(5f);
-        if (SceneManager.GetActiveScene().buildIndex < 3) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (SceneManager.GetActiveScene().buildIndex < 5) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        else SceneManager.LoadScene(0);
         _cc.enabled = true;
     }
 
