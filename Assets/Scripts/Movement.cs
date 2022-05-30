@@ -71,7 +71,7 @@ public class Movement : MonoBehaviour
         //moure's amb el click esquerra del mouse
             if(gameObject.layer == 11){
 
-                if (Input.GetKey(KeyCode.Mouse0))
+                if (Input.GetKey(KeyCode.P))
                 {
                     if (inLadder == true)
                     {
@@ -89,7 +89,7 @@ public class Movement : MonoBehaviour
             }
             else {
                 if (gameObject.layer == 12){
-                    if (Input.GetKey(KeyCode.Mouse1)) {
+                    if (Input.GetKey(KeyCode.W)) {
                         if (inLadder == true)
                         {
                             _anim.SetBool("Climb", true);
