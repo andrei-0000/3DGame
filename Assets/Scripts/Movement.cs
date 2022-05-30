@@ -51,8 +51,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
         Vector3 movement = Vector3.zero;
-        
-        if(Input.GetKeyDown(KeyCode.G)) godMode = !godMode;
+        if (Input.GetKeyDown(KeyCode.G)) godMode = !godMode;
         if (Input.GetKeyDown(KeyCode.Alpha1))  SceneManager.LoadScene(1);
         else if (Input.GetKeyDown(KeyCode.Alpha2)) SceneManager.LoadScene(2);
         else if (Input.GetKeyDown(KeyCode.Alpha3)) SceneManager.LoadScene(3);
