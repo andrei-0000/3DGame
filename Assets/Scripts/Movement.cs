@@ -109,6 +109,7 @@ public class Movement : MonoBehaviour
     }
 
      public void killpl(){
+        SoundManager.PlaySound("hit");
         Debug.Log("hola q hola");
         _anim.SetBool("Die",true);
         StartCoroutine("Teleport");
@@ -175,6 +176,7 @@ public class Movement : MonoBehaviour
     }
 
     public void win(){
+        SoundManager.PlaySound("win");
         _anim.SetBool("Win",true);
     }
 
